@@ -12,12 +12,21 @@ import org.springframework.transaction.annotation.Transactional;
 import entity.Account;
 import entity.Customer;
 
+/** https://spring.io/blog/2011/02/10/getting-started-with-spring-data-jpa/ */
 @Repository
 @Transactional(readOnly = true)
 class AccountServiceImpl implements AccountService {
 
 	@PersistenceContext
 	private EntityManager em;
+
+	public EntityManager getEm() {
+		return em;
+	}
+
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
 
 	@Override
 	@Transactional
