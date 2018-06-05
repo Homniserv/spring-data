@@ -6,8 +6,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.acme.repositories.AccountRepository;
 
 import entity.Account;
 import entity.Customer;
@@ -19,6 +22,9 @@ class AccountServiceImpl implements AccountService {
 
 	@PersistenceContext
 	private EntityManager em;
+
+	  @Autowired
+	  private AccountRepository repository;
 
 	public EntityManager getEm() {
 		return em;
@@ -32,12 +38,13 @@ class AccountServiceImpl implements AccountService {
 	@Transactional
 	public Account save(Account account) {
 
-		if (account.getId() == null) {
-			em.persist(account);
-			return account;
-		} else {
-			return em.merge(account);
-		}
+//		if (account.getId() == null) {
+//			em.persist(account);
+//			return account;
+//		} else {
+//			return em.merge(account);
+//		}
+		return repository.save(account);
 	}
 
 	@Override
